@@ -24,20 +24,19 @@ namespace PubSub.Subscriber
                 });
 
 
-                x.ReceiveEndpoint("input-queue", e =>
+                x.ReceiveEndpoint("string-message-input-queue", e =>
                 {
 
                     e.UseMessageRetry(r => r.Immediate(5));
 
-                    e.Subscribe("my-topic-1", callback =>
-                    {
+                    e.Subscribe("string-message-topic", callback =>{});
 
-                    });
+                    e.Consumer(() => new Handler());
+                });
 
-                    e.Subscribe("my-topic-2", callback =>
-                    {
-                    });
-
+                x.ReceiveEndpoint("datetime-message-input-queue", e =>
+                {
+                    e.Subscribe("datetime-message-topic", callback =>{});
 
                     e.Consumer(() => new Handler());
                 });
